@@ -1,0 +1,39 @@
+- name: "Instalando entorno curso utn-devops"
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "sudo password"
+      private: yes
+  tasks:
+    - name: "Actualizando cache de repositorios"
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: "Instalando aplicaciones requeridas"
+      ansible.builtin.package:
+        name:
+          - virtualbox
+          - git
+          - vagrant
+        state: latest
+
+    - name: "Instalando plugin vagrant-vbguest"
+      command: "vagrant plugin install vagrant-vbguest"
+
+    - name: "Chequeando versiones de apps instaladas"
+      command: "{{  item  }} --version"
+      register: out
+      loop:
+        - vboxmanage
+        - git
+        - vagrant
+      changed_when: False
+
+    - name: "Mostrando versiones de apps instaladas"
+      debug:
+        msg: "{{ item.cmd }} -> {{ item.stdout }}"
+      with_items: "{{ out.results }}"
