@@ -1,3 +1,6 @@
+# Crear una cuenta en github
+# Agregar nuestra llave publica
+# Crear el repositorio utn-devops
 # Instalar entorno
 ansible-playbok utn-devops_install_environment.yml
 # Crear repositorio git, Parado sobre el directorio unidad-1-vagrant
@@ -5,12 +8,17 @@ git init
 # Configurar git, quitar --global si solo se desea configurar el repositorio actual
 git config --global user.email "jorgeprediger@gmail.com"
 git config --global user.name "jorgeprediger"
-echo '.vagrant' > .gitignore
 
+echo '.vagrant' > .gitignore
 git status
 git add .gitignore
 git add README.md
 git add utn-devops_install_environment.yml
+git commit -m "Primer commit"
+git branch -M unidad-1-vagrant
+ssh -T git@github.com
+git remote add origin git@github.com:jorgeprediger/utn-devops.git
+git push -u origin unidad-1-vagrant
 # Crear el archivo de configuracion Vagrantfile
 vagrant init
 
