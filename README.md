@@ -1,6 +1,9 @@
 # Crear una cuenta en github
 # Agregar nuestra llave publica
 # Crear el repositorio utn-devops
+# Instalar Ansible
+# Ubuntu/Debian
+apt install ansible
 # Instalar entorno
 ansible-playbok utn-devops_install_environment.yml
 # Crear repositorio git, Parado sobre el directorio unidad-1-vagrant
