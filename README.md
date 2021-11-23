@@ -49,7 +49,7 @@ git commit -a -m "Add Vagrantfile"
 * Editar Vagrantfile  
 * Iniciar la maquina virtual  
 ```
-vagrant up
+vagrant up --provision
 vagrant ssh
 ```
 * Apagar maquina virtual y destruirla  
