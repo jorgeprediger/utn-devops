@@ -66,7 +66,8 @@ vagrant destroy
 git branch unidad-2-docker
 git checkout unidad-2-docker
 ```
-* Realizar el primer commit sobre el nuevo branch  
+* Realizar el primer commit sobre el nuevo branch y hacer el push a github
 ```
 git commit -a -m "Primer commit sobre el branch unidad-2-docker"
+git push -u origin unidad-2-docker
 ```
