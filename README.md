@@ -1,4 +1,4 @@
-# Pasos para la practica 1
+# Pasos para la practica 1 vagrant
 * Crear una cuenta en github  
 * Agregar nuestra llave publica en github  
 * Crear el repositorio utn-devops en github  
@@ -56,4 +56,17 @@ vagrant ssh
 ```
 vagrant halt
 vagrant destroy
+```
+  
+# Pasos para la practica 2 docker
+* Editar el archivo Vagrantfile y modificarlo para instalar docker  
+[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)  
+* Crear un nuevo branch y moverse dentro del mismo
+```
+git branch unidad-2-docker
+git checkout unidad-2-docker
+```
+* Realizar el primer commit sobre el nuevo branch  
+```
+git commit -a -m "Primer commit sobre el branch unidad-2-docker"
 ```

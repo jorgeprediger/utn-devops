@@ -51,6 +51,12 @@ Vagrant.configure("2") do |config|
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get upgrade -y
-    apt-get install -y nginx
+    #apt-get remove -y docker docker-engine docker.io containerd runc
+    apt-get install -y ca-certificates curl gnupg lsb-release
+    update-ca-certificates
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --no-tty --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    apt-get update
+    apt-get install -y docker-ce docker-ce-cli containerd.io
   SHELL
 end
