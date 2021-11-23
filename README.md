@@ -18,7 +18,7 @@ cd ${HOME}/UTN-DevOps
 git init
 ```
 * Configurar git  
-Quitar --global si solo se desea configurar el repositorio actual)  
+Quitar --global si solo se desea configurar el repositorio actual  
 ```
 git config --global user.email "%youremailaddress@domain.com%"
 git config --global user.name "%youruser%"
@@ -43,7 +43,9 @@ vagrant init
 git add Vagrantfile
 ```
 * Realizar el primer commit  
-`git commit -a -m "Add Vagrantfile"`
+```
+git commit -a -m "Add Vagrantfile"
+```
 * Editar Vagrantfile  
 * Iniciar la maquina virtual  
 ```
