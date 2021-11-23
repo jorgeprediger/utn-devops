@@ -49,14 +49,18 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    apt-get upgrade -y
-    #apt-get remove -y docker docker-engine docker.io containerd runc
-    apt-get install -y ca-certificates curl gnupg lsb-release
+    export APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+    apt-get update -qq
+    apt-get upgrade -qq -o=Dpkg::Use-Pty=0 -y
+    # Install Docker
+    apt-get install -qq -o=Dpkg::Use-Pty=0 -y ca-certificates curl gnupg lsb-release
     update-ca-certificates
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --no-tty --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --yes --no-tty --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    apt-get update
-    apt-get install -y docker-ce docker-ce-cli containerd.io
+    apt-get update -qq
+    apt-get install -qq -o=Dpkg::Use-Pty=0 -y docker-ce docker-ce-cli containerd.io
+    # Install Docker Compose
+    curl -fsSL "https://github.com/docker/compose/releases/download/v2.1.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
   SHELL
 end
