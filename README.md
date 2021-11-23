@@ -1,41 +1,45 @@
-# Crear una cuenta en github
-# Agregar nuestra llave publica
-# Crear el repositorio utn-devops
-# Instalar Ansible
-# Ubuntu/Debian
-apt install ansible
-# Instalar entorno
-ansible-playbok utn-devops_install_environment.yml
-# Crear repositorio git, Parado sobre el directorio unidad-1-vagrant
-git init
-# Configurar git, quitar --global si solo se desea configurar el repositorio actual
-git config --global user.email "%youremailaddress@domain.com%"
+# Pasos para la practica 1
+* Crear una cuenta en github
+* Agregar nuestra llave publica en github
+* Crear el repositorio utn-devops en github
+* Instalar Ansible en nuestra PC
+Ejemplo para distros Ubuntu/Debian
+`apt install ansible`
+* Instalar entorno en nuestra PC (git,vagrant,virtualbox)
+`ansible-playbok utn-devops_install_environment.yml`
+* Crear repositorio git en nuestra PC
+```mkdir ${HOME}/UTN-DevOps
+cd ${HOME}/UTN-DevOps
+git init```
+* Configurar git
+Quitar --global si solo se desea configurar el repositorio actual)
+```git config --global user.email "%youremailaddress@domain.com%"
 git config --global user.name "%youruser%"
+ssh -T git@github.com
+git remote add origin git@github.com:%youruser%/utn-devops.git```
 
-echo '.vagrant' > .gitignore
-git status
+* Agregar archivos y hacer un push a github
+```echo '.vagrant' > .gitignore
 git add .gitignore
+touch README.md
 git add README.md
 git add utn-devops_install_environment.yml
 git commit -m "Primer commit"
 git branch -M unidad-1-vagrant
-ssh -T git@github.com
-git remote add origin git@github.com:%youruser%/utn-devops.git
-git push -u origin unidad-1-vagrant
-# Crear el archivo de configuracion Vagrantfile
-vagrant init
+git push -u origin unidad-1-vagrant```
+* Crear el archivo de configuracion Vagrantfile
+```vagrant init
+git add Vagrantfile```
 
-git add Vagrantfile
+* Realizar el primer commit
+`git commit -a -m "Add Vagrantfile"`
 
-# Realizar el primer commit
-git commit
-# Editar Vagrantfile
+* Editar Vagrantfile
 
-# Iniciar la maquina virtual
-vagrant up
+* Iniciar la maquina virtual
+```vagrant up
+vagrant ssh```
 
-vagrant ssh
-
-vagrant halt
-
-vagrant destroy
+* Apagar maquina virtual y destruirla
+```vagrant halt
+vagrant destroy```
