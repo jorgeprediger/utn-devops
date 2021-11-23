@@ -2,10 +2,10 @@
 * Crear una cuenta en github
 * Agregar nuestra llave publica en github
 * Crear el repositorio utn-devops en github
-* Instalar Ansible en nuestra PC
-Ejemplo para distros Ubuntu/Debian
+* Instalar Ansible en nuestra PC  
+Ejemplo para distros Ubuntu/Debian  
 `apt install ansible`
-* Instalar entorno en nuestra PC (git,vagrant,virtualbox)
+* Instalar entorno en nuestra PC (git,vagrant,virtualbox)  
 `ansible-playbok utn-devops_install_environment.yml`
 * Crear repositorio git en nuestra PC
 ```
@@ -39,7 +39,7 @@ vagrant init
 git add Vagrantfile
 ```
 
-* Realizar el primer commit
+* Realizar el primer commit  
 `git commit -a -m "Add Vagrantfile"`
 
 * Editar Vagrantfile
