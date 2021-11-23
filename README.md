@@ -4,9 +4,13 @@
 * Crear el repositorio utn-devops en github  
 * Instalar Ansible en nuestra PC  
 Ejemplo para distros Ubuntu/Debian  
-`apt install ansible`
+```
+apt install ansible
+```
 * Instalar entorno en nuestra PC (git,vagrant,virtualbox)  
-`ansible-playbok utn-devops_install_environment.yml`
+```
+ansible-playbok utn-devops_install_environment.yml
+```
 * Crear repositorio git en nuestra PC  
 ```
 mkdir ${HOME}/UTN-DevOps
