@@ -1,12 +1,9 @@
-version: "2"
+version: "3.9"
 
 services:
   web:
     # https://registry.hub.docker.com/_/nginx
     image: "nginx:1.21-alpine"
-    environment:
-      MYSQL_DATABASE: 'my_db'
-      MYSQL_ROOT_PASSWORD: /run/secrets/mysql-root-pass
     depends_on:
       - phpfpm
       - database
@@ -15,8 +12,6 @@ services:
     ports:
       - "8081:80"
       - "8443:443"
-    secrets:
-      - mysql-root-pass
 
   phpfpm:
     # https://registry.hub.docker.com/_/php
@@ -26,14 +21,20 @@ services:
 
   database:
     # https://registry.hub.docker.com/_/mariadb
+    # https://trobertson.site/securing-passwords-with-docker-secrets/
     image: "mariadb:10.7-focal"
+    environment:
+      MARIADB_DATABASE: 'my_db'
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mysql-root-password
     networks:
       - app-tier
+    secrets:
+      - mysql-root-password
 
 networks:
   app-tier:
     driver: bridge
 
 secrets:
-  mysql-root-pass:
-    file: ./mysql-root-pass
+  mysql-root-password:
+    file: ./secrets/mysql-root-password
