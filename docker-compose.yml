@@ -1,0 +1,39 @@
+version: "2"
+
+services:
+  web:
+    # https://registry.hub.docker.com/_/nginx
+    image: "nginx:1.21-alpine"
+    environment:
+      MYSQL_DATABASE: 'my_db'
+      MYSQL_ROOT_PASSWORD: /run/secrets/mysql-root-pass
+    depends_on:
+      - phpfpm
+      - database
+    networks:
+      - app-tier
+    ports:
+      - "8081:80"
+      - "8443:443"
+    secrets:
+      - mysql-root-pass
+
+  phpfpm:
+    # https://registry.hub.docker.com/_/php
+    image: "php:8.0-fpm-alpine"
+    networks:
+      - app-tier
+
+  database:
+    # https://registry.hub.docker.com/_/mariadb
+    image: "mariadb:10.7-focal"
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+
+secrets:
+  mysql-root-pass:
+    file: ./mysql-root-pass
