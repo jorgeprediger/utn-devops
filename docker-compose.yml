@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   web:
+    container_name: "web"
     # https://registry.hub.docker.com/_/nginx
     image: "nginx:1.21-alpine"
     depends_on:
@@ -14,22 +15,33 @@ services:
       - "8443:443"
 
   phpfpm:
+    container_name: "phpfpm"
     # https://registry.hub.docker.com/_/php
     image: "php:8.0-fpm-alpine"
     networks:
       - app-tier
 
   database:
+    container_name: "database"
     # https://registry.hub.docker.com/_/mariadb
     # https://trobertson.site/securing-passwords-with-docker-secrets/
     image: "mariadb:10.7-focal"
     environment:
       MARIADB_DATABASE: 'my_db'
+      MARIADB_USER: 'my_user'
+      MARIADB_PASSWORD_FILE: /run/secrets/mysql-dbuser-password
       MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mysql-root-password
     networks:
       - app-tier
     secrets:
       - mysql-root-password
+      - mysql-dbuser-password
+    volumes:
+      - ./provision/mysql/init:/docker-entrypoint-initdb.d
+
+volumes:
+  database:
+  app:
 
 networks:
   app-tier:
@@ -38,3 +50,6 @@ networks:
 secrets:
   mysql-root-password:
     file: ./secrets/mysql-root-password
+  mysql-dbuser-password:
+    file: ./secrets/mysql-dbuser-password
+
