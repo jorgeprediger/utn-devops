@@ -26,6 +26,8 @@ services:
     environment:
       MARIADB_DATABASE: 'my_db'
       MARIADB_ROOT_PASSWORD_FILE: /run/secrets/mysql-root-password
+    volumes:
+      - ./data/database:/var/lib/mysql
     networks:
       - app-tier
     secrets:
